@@ -7,8 +7,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body class="d-flex justify-content-center m-5 gap-3 bg-primary text-light" id="body" onload="displayDate()">
-        <header class="d-flex flex-column w-25 p-2 border border-secondary border-2 rounded-start bg-black">
-            <div class="mt-5">
+        <header class="d-flex flex-column w-25 p-2 border border-secondary border-2 rounded-start bg-black" id="header">
+            <div class="mt-5" id="div1">
                 <img src="assets/img/profile.png" class="img-fluid d-block object-fit-fill border border-light rounded-circle mx-auto w-50" alt="">
             </div>
             <div class="my-2">
@@ -31,10 +31,10 @@
             <div class="border-bottom border-light-subtle my-3" id="div-about-me">
                 <p class="fs-1 text-info">About Me</p>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo dolores repellat minima eligendi beatae obcaecati placeat dignissimos nemo sed quod eos, delectus distinctio sint numquam molestias. Doloremque porro commodi nisi.</p>
-                <textarea name="character-count" id="count" onkeyup="displayCharacterCount()"></textarea>
+                <textarea name="character-count" class="" id="count" onkeyup="displayCharacterCount()" onfocus="highlight(this)" onfocusout = "deHighlight(this)"></textarea>
                 <label for="count" id="label-count"></label>
             </div>
-            <div class="border-bottom border-light-subtle my-3">
+            <div class="border-bottom border-light-subtle my-3" id="div-skills">
                 <p class="fs-1 text-info">Skills</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium hic animi eos unde autem, cupiditate error nemo consequatur, ea dolorem vitae veniam. Hic illum accusamus sequi consectetur, blanditiis ipsum iste!</p>
             </div>
@@ -51,29 +51,45 @@
                 <form id="form-feedback">
                     <div class="my-3">
                         <label for="input-name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="input-name">
+                        <input type="text" class="form-control" id="input-name" onfocus="highlight(this)" onfocusout = "deHighlight(this)">
                     </div>
                     <div class="my-3">
                         <label for="input-email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="input-email">
+                        <input type="email" class="form-control" id="input-email" onfocus="highlight(this)" onfocusout = "deHighlight(this)">
                     </div>
                     <div class="my-3">
                         <label for="input-feedback" class="form-label">Feedback</label>
-                        <input type="text" class="form-control" id="input-feedback">
+                        <input type="text" class="form-control " id="input-feedback" onfocus="highlight(this)" onfocusout = "deHighlight(this)">
                     </div>
                     <div class="my-3">
                         <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
                     </div>
                 </form>
             </div>
+            <div class="border-bottom border-light-subtle my-3">
+                <p class="fs-1 text-info">Add Skill</p>
+                <form id="form-skills">
+                    <div class="my-3">
+                        <label for="input-skill" class="form-label">Skill</label>
+                        <input type="text" class="form-control" id="input-skill" onfocus="highlight(this)" onfocusout = "deHighlight(this)">
+                    </div>
+                    <div class="my-3">
+                        <input type="button" class="btn btn-primary" id="btn-submit-skill" value="Submit">
+                    </div>
+                </form>
+            </div>
         </main>
         <script>
             const body = document.getElementById("body");
+            const header = document.getElementById("header");
             const divAboutMe = document.getElementById("div-about-me");
+            const divSkills = document.getElementById("div-skills");
             const buttonHide = document.getElementById("button-hide");
             const buttonBg = document.getElementById("button-bg");
             const formFeedback = document.getElementById("form-feedback");
+            const formSkills = document.getElementById("form-skills")
             const buttonSubmit = document.getElementById("btn-submit");
+            const buttonSubmitSkill = document.getElementById("btn-submit-skill");
 
             buttonSubmit.addEventListener("click", function(){
                 let name = document.getElementById("input-name").value;
@@ -109,6 +125,15 @@
                 }
             })
 
+            buttonSubmitSkill.addEventListener("click", function(){
+                let par = document.createElement("p");
+                let node = document.createTextNode(document.getElementById("input-skill").value);
+                par.appendChild(node);
+
+                divSkills.appendChild(par);
+                formSkills.reset();
+            })
+
             function displayCharacterCount(){
                 let text = document.getElementById("count").value;
                 let textCount = text.length;
@@ -126,6 +151,20 @@
                 else{
                     alert("Good Evening");
                 }
+                let par = document.createElement("p");
+                let node = document.createTextNode(new Date());
+                par.appendChild(node);
+
+                let child = document.getElementById("div1");
+                header.insertBefore(par, child);
+            }
+
+            function highlight(inputText){
+                inputText.classList.add("bg-warning")
+            }
+
+            function deHighlight(inputText){
+                inputText.classList.remove("bg-warning")
             }
         </script>
     </body>
