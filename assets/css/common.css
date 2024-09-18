@@ -1,53 +1,62 @@
-.grid-container{
-    display: grid;
-    grid-template-columns: auto auto;
-    background-color: black;
-    padding: 1%;
+@keyframes fade-in {
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
 }
 
-.grid-item{
-    background-color: white;
-    border: 1px solid black;
-    padding: 2%;
-    font-size: 22px;
-    text-align: justify;
+@keyframes swipe-from-left {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
 }
 
-.grid-item table, th, td{
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 2%;
-    text-align: center;
+@keyframes swipe-from-right {
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
 }
 
-.grid-item table{
-    border-spacing: 30px;
+header{
+    animation: swipe-from-left 0.7s ease-out ;
 }
 
-.grid-item td{
-    text-align: justify;
+main{
+    animation: swipe-from-right 0.7s ease-out ;
 }
 
-.grid-item h1{
-    text-align: center;
+div{
+    animation: fade-in 1s ease-in;
 }
 
-.container{
-    margin: 2%;
-    border: 1px solid black;
-    padding: 2%;
-    background-color: white;
+img{
+    transition: all 2s;
 }
 
-.container h1{
-    text-align: center;
+img:hover{
+    transform: rotate3d(1, 1, 1, 360deg);
 }
 
-.img1{
-    float: right;
+.button-transition-spin{
+    transition: transform 2s;
 }
-body{
-    background-color: grey;
+
+.button-transition-spin:hover{
+    transform: rotateY(360deg);
+}
+
+li{
+    transition: transform 2s;
+}
+
+li:hover{
+    transform: scale(2, 2);
 }
